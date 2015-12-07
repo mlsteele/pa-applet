@@ -69,11 +69,14 @@ void notifications_flash(void)
 	    icon_name = "audio-volume-high";
     }
 
+    char body_string[] = "Volume: xxx%";
+    snprintf(body_string, sizeof(body_string), "Volume: %2.f%%", as->volume);
+
     // Update the notification volume
     notify_notification_set_hint_int32(notification, "value", (gint)as->volume);
 
     // Update the notification icon
-    notify_notification_update(notification, PROGRAM_NAME, NULL, icon_name);
+    notify_notification_update(notification, PROGRAM_NAME, body_string, icon_name);
 
     // Show the notification
     notify_notification_show(notification, NULL);
